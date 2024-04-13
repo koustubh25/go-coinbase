@@ -23,13 +23,13 @@ type RESTClient struct {
 }
 
 const (
-	protocolScheme = "https"
+	httpProtocolScheme = "https"
 )
 
 // DoRequest sends an HTTP request and processes the response.
 // it is pretty dumb in the sense, it doesn't automatically verify the url endpoints e.g. websocket or REST
 func (c *RESTClient) DoRequest(ctx context.Context, method, url string, query urlpkg.Values, result, reqBody interface{}) error {
-	url = protocolScheme + "://" + url
+	url = httpProtocolScheme + "://" + url
 	if len(query) > 0 {
 		url += "?" + query.Encode()
 	}
@@ -52,7 +52,7 @@ func (c *RESTClient) DoRequest(ctx context.Context, method, url string, query ur
 		req.Header.Set("Content-Type", "application/json")
 	}
 	c.Logger.Debug("setting auth token if not set already...", "method", method, "url", url)
-	err = auth.SetToken(req, method+" "+strings.TrimPrefix(url, protocolScheme+"://"))
+	err = auth.SetToken(req, method+" "+strings.TrimPrefix(url, httpProtocolScheme+"://"))
 	if err != nil {
 		return err
 	}

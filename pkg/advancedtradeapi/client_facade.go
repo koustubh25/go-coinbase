@@ -1,6 +1,8 @@
 package advancedtradeapi
 
-import "github.com/koustubh25/go-coinbase/pkg/internal"
+import (
+	"github.com/koustubh25/go-coinbase/pkg/internal"
+)
 
 // NewRESTClient creates a new client with the provided options
 // if different values that update the same field are provided, the last one will be used
@@ -16,5 +18,15 @@ func NewRESTClient(opts ...Option) (*internal.RESTClient, error) {
 	if err != nil {
 		return nil, err
 	}
+	return c, nil
+}
+
+func NewWebSocketClient(opts ...Option) (*internal.WebSocketClient, error) {
+	o := getOptionsWithDefaults(opts)
+	c := &internal.WebSocketClient{
+		Logger:                  o.Logger,
+		AdvanceTradeAPIEndpoint: o.AdvanceTradeAPIEndpoint,
+	}
+	// connection field still needs to be set, which is done when calling the specific apis
 	return c, nil
 }

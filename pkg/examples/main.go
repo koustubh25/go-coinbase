@@ -10,5 +10,7 @@ func main() {
 		Level: slog.LevelDebug,
 	}))
 	slog.SetDefault(logger)
-	getAccounts()
+	// getAccounts()
+	subscribe()
+
 }

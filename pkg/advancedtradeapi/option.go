@@ -23,14 +23,14 @@ func WithJWT(jwt string) Option {
 
 func WithProduction() Option {
 	return func(o *internal.Options) {
-		advanceTradeAPIEndpoint := &internal.AdvanceTradeAPIEndpoint{Production: &internal.Endpoint{RESTBaseURL: ProductionRESTBaseURL, WebSocketURL: ProductionWebSocketURL}}
+		advanceTradeAPIEndpoint := &internal.AdvanceTradeAPIEndpoint{Production: &internal.Endpoint{RESTBaseURL: ProductionRESTBaseURL, WebSocketURL: ProductionWebSocketURL}, Sandbox: nil}
 		o.AdvanceTradeAPIEndpoint = advanceTradeAPIEndpoint
 	}
 }
 
 func WithSandbox() Option {
 	return func(o *internal.Options) {
-		advanceTradeAPIEndpoint := &internal.AdvanceTradeAPIEndpoint{Sandbox: &internal.Endpoint{RESTBaseURL: SandboxRESTBaseURL, WebSocketURL: SandboxWebSocketURL}}
+		advanceTradeAPIEndpoint := &internal.AdvanceTradeAPIEndpoint{Sandbox: &internal.Endpoint{RESTBaseURL: SandboxRESTBaseURL, WebSocketURL: SandboxWebSocketURL}, Production: nil}
 		o.AdvanceTradeAPIEndpoint = advanceTradeAPIEndpoint
 	}
 }
